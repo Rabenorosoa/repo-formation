@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-lg">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'myApp:home'%}">My Blog</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#SupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="SupportedContent">
+        <ul class="navbar-nav ms-auto ">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="{% url 'myApp:home'%}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'myApp:newPost'%}">new Post</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'accountsApp:logout'%}">logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'accountsApp:logout'%}">login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'accountsApp:register'%}">sign up</a>
+          </li>
+          {% endif %}
+          
+        </ul>
+        
+      </div>
+      <form action = "{% url 'myApp:search' %}" class="d-flex m-lg-3" method = "GET">
+        <input placeholder = 'recherche' class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name ="search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+    </div>
+  </nav>

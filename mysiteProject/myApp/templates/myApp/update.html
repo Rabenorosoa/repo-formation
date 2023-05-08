@@ -1,0 +1,36 @@
+{% extends 'myApp/layouts/base.html' %}
+{% load static %}
+{% block title %}
+    Update
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Update page  {{post}}</h1>
+
+<div class = "container">
+    <div class = "row">
+        <div class = "col-md-8 mx-auto">
+            <form action="" method="POST" enctype="multipart/form-data">
+            {% for field in form %}
+                <div class="form-group">
+                {% csrf_token %}
+                <strong>{{ field.label_tag }}</strong>
+                {{ field }}
+                {% if field.help_text %}
+                <p class = "help">{{field.help_text}}</p>
+                {% endif %}
+                </div>
+                
+            {%  endfor %} 
+            <img class =' mb-3 mt-3'src="{{ post.image.url }}" width =" 200"></br>
+            </br>
+            <input type ="submit" class = "btn btn-primary" value = "Update Post">
+            </form>
+        </div>
+    </div>
+</div> 
+
+
+{% endblock %}

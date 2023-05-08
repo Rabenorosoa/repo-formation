@@ -1,0 +1,36 @@
+{% extends 'myApp/layouts/base.html' %}
+{% load static %}
+{% block title %}
+    search
+{% endblock %}
+
+
+{% block content %}
+
+    <h3 class = "text-center">Results: {{ message }} </h3>
+<div class="row  row-cols-md-3  row-cols-sm-2">
+    {% for post in post %}
+<div class = "col">
+    <div class ="card mb-3 shadow"   >
+        <div class="card-body style="width: 18rem;">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+            {% endif %}
+            <h5 class="card-title">{{post.title}}</h5>
+            <p class="card-text">{{ post.content|truncatechars:"100" }}</p>
+            <a href="{% url 'myApp:details' post.id %}" class="btn btn-primary">More</a>
+            {% if i.user == request.user %}
+            <a href="{% url 'myApp:updatePost' post.id %}" class="btn btn-success">Update</a>
+            <a href="{% url 'myApp:deletePost' post.id %}" class="btn btn-danger">Delete</a>
+            {% endif %}
+            
+        </div>
+        <div class = 'card-footer'>
+            {{ post.user.username }}
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}

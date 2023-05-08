@@ -1,0 +1,61 @@
+{% extends 'myApp/layouts/base.html' %}
+{% load static %}
+{% load static %}
+{% block title %}
+All posts 
+{% endblock %}
+
+
+{% block content %}
+
+<h1>home page</h1>
+<h4 class= 'text-center'>on a : {{ message }}</h4>
+{% comment %} <img src="{% static 'image/fruit.jpg' %}" {% endcomment %}
+<div class="row  row-cols-md-3  row-cols-sm-2">
+{% for i in i %}
+<div class = "col">
+    <div class ="card mb-3 shadow"   >
+        <div class="card-body style="width: 18rem;">
+            {% if i.image %}
+            <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+            {% endif %}
+            <h5 class="card-title">{{i.title}}</h5>
+            <p class="card-text">{{ i.content|truncatechars:"100" }}</p>
+            <a href="{% url 'myApp:details' i.id %}" class="btn btn-primary">More</a>
+            {% if i.user == request.user %}
+            <a href="{% url 'myApp:updatePost' i.id %}" class="btn btn-success">Update</a>
+            <a href="{% url 'myApp:deletePost' i.id %}" class="btn btn-danger">Delete</a>
+            {% endif %}
+            
+        </div>
+        <div class = 'card-footer'>
+            {{ i.user.username }}
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+<nav >
+    <ul class="pagination justify-content-center">
+        {% if i.has_previous %}
+        <li class="page-item ">
+            <a class="page-link" href="?page={{ i.previous_page_number }}">
+                <span aria-hidden = true>&laquo; Previous</span>
+            </a>
+        </li>
+        {% endif %}
+        <li class= "page-item">
+            <p class= "page-link text-muted">
+            {{ i.number }} of {{ i.paginator.num_pages }}.
+            </p>
+        </li>
+        {% if i.has_next %}
+        <li class="page-item ">
+            <a class="page-link" href="?page={{ i.next_page_number }}">
+                <span aria-hidden = true>&raquo; Next</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endblock %}

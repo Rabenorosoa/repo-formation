@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}{{mysSite}}/{% endblock %}</title> 
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href ="{% static 'css/bootstrap.css'  %} ">
+        {% block stylesheet %}
+        
+        {% endblock stylesheet %}
+    </head>
+        <body>
+            <heder>
+                {% block header %}
+                {% include 'layouts/nav.html'%}
+                {% endblock %}
+            </header>
+            <div class="container">
+            {% block content %}
+                
+            {% endblock %}
+            </div>
+            
+            <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+            {% block javaScript%}
+            
+            {% endblock %}
+        </body>
+</html>
